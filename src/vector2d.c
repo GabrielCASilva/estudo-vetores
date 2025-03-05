@@ -7,10 +7,10 @@ static float Vector2D_magnitude(Vector2D vec2);
 static void Vector2D_addition(Vector2D *vec2_a, Vector2D vec2_b);
 static void Vector2D_subtraction(Vector2D *vec2_a, Vector2D vec2_b);
 
-Vector2D Vector2D_init(void) {
+Vector2D Vector2D_init(int x, int y) {
   Vector2D vec2 = {
-      .x = 0,
-      .y = 0,
+      .x = x,
+      .y = y,
       .draw = &Vector2D_draw,
       .magnitude = &Vector2D_magnitude,
       .add = &Vector2D_addition,

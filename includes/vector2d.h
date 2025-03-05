@@ -12,5 +12,5 @@ struct vector2d {
 
 typedef struct vector2d Vector2D;
 
-Vector2D Vector2D_init(void);
+Vector2D Vector2D_init(int x, int y);
 #endif // !VECTOR2D_H
