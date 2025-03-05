@@ -1,29 +1,23 @@
 #include "vector2d.h"
 #include "raylib.h"
 #include <math.h>
-#include <stdio.h>
 
-static void Vector2D_loop(Vector2D *vec2);
 static void Vector2D_draw(Vector2D vec2);
 static float Vector2D_magnitude(Vector2D vec2);
+static void Vector2D_addition(Vector2D *vec2_a, Vector2D vec2_b);
+static void Vector2D_subtraction(Vector2D *vec2_a, Vector2D vec2_b);
 
 Vector2D Vector2D_init(void) {
-  Vector2D vec2 = {.x = 20,
-                   .y = 20,
-                   .loop = &Vector2D_loop,
-                   .draw = &Vector2D_draw,
-                   .magnitude = &Vector2D_magnitude};
+  Vector2D vec2 = {
+      .x = 0,
+      .y = 0,
+      .draw = &Vector2D_draw,
+      .magnitude = &Vector2D_magnitude,
+      .add = &Vector2D_addition,
+      .sub = &Vector2D_subtraction,
+  };
 
   return vec2;
-}
-
-static void Vector2D_loop(Vector2D *vec2) {
-  int x = GetMousePosition().x;
-  int y = GetMousePosition().y;
-  vec2->x = x;
-  vec2->y = y;
-
-  printf("magnitude: %.2f\n", vec2->magnitude(*vec2));
 }
 
 static void Vector2D_draw(Vector2D vec2) {
@@ -33,7 +27,22 @@ static void Vector2D_draw(Vector2D vec2) {
 }
 
 // calculo do comprimento de um vetor de um ponto ao outro
+// a comprimento do vetor sempre será positivo
 static float Vector2D_magnitude(Vector2D vec2) {
   // teorema de pitágoras com vetores
   return sqrt((vec2.x * vec2.x) + (vec2.y * vec2.y));
+}
+
+// resultado do "movimento" do vetor A e B
+// a + b = (a1 + b1, a2 + b2)
+static void Vector2D_addition(Vector2D *vec2_a, Vector2D vec2_b) {
+  vec2_a->x += vec2_b.x;
+  vec2_a->y += vec2_b.y;
+}
+
+// resultado do "movimento" de A + (-B)
+// a - b = (a1 - b1, a2 - b2)
+static void Vector2D_subtraction(Vector2D *vec2_a, Vector2D vec2_b) {
+  vec2_a->x -= vec2_b.x;
+  vec2_a->y -= vec2_b.y;
 }
