@@ -33,17 +33,15 @@ int main(void) {
 void setup(void) {
   //
   position = Vector2D_init(1, 1);
-  velocity = Vector2D_init(1, 1);
+  velocity = Vector2D_init(1.6, 1.6);
 }
 
 void loop(void) {
-  /*int x = GetMousePosition().x;*/
-  /*int y = GetMousePosition().y;*/
-  /*position.x = 1;*/
-  /*position.y = 1;*/
-
-  printf("magnitude: %.2f\n", position.magnitude(position));
+  float mag_pos = position.magnitude(position);
+  float mag_vel = velocity.magnitude(velocity);
+  printf("magnitude position: [%.2f], velocity: [%.2f]\n", mag_pos, mag_vel);
   position.add(&position, velocity);
+  velocity.scale(&velocity, .99);
 }
 
 void draw(void) {
