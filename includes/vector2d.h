@@ -9,6 +9,11 @@ struct vector2d {
   void (*add)(struct vector2d *self, struct vector2d other);
   void (*sub)(struct vector2d *self, struct vector2d other);
   void (*scale)(struct vector2d *self, float n);
+  struct vector2d (*rotate)(struct vector2d self, float angle);
+  void (*normalize)(struct vector2d *self);
+  struct vector2d (*unit_vector)(struct vector2d self);
+  float (*dot_product)(struct vector2d self, struct vector2d other);
+  struct vector2d (*perpendicular)(struct vector2d self);
 };
 
 typedef struct vector2d Vector2D;

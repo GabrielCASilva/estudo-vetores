@@ -7,8 +7,11 @@ void setup(void);
 void loop(void);
 void draw(void);
 
+static Camera2D camera = {0};
 static Vector2D position;
 static Vector2D velocity;
+static Vector2D rotate_position;
+static float angle;
 
 int main(void) {
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Template");
@@ -32,12 +35,21 @@ int main(void) {
 
 void setup(void) {
   //
-  position = Vector2D_init(1, 1);
+  angle = 0;
+  position = Vector2D_init(60, 60);
   velocity = Vector2D_init(1.6, 1.6);
+
+  // camera
+  camera.offset = (Vector2){WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f};
+  camera.rotation = 0.5f;
+  camera.zoom = 1.0f;
 }
 
 void loop(void) {
   float mag_pos = position.magnitude(position);
+  rotate_position = position.rotate(position, angle);
+  /*position.add(&position, rotation);*/
+  angle += 3.14f / 12;
   float mag_vel = velocity.magnitude(velocity);
   printf("magnitude position: [%.2f], velocity: [%.2f]\n", mag_pos, mag_vel);
   position.add(&position, velocity);
@@ -47,6 +59,10 @@ void loop(void) {
 void draw(void) {
   BeginDrawing();
   ClearBackground(BLACK);
-  position.draw(position);
+
+  BeginMode2D(camera);
+  rotate_position.draw(rotate_position);
+  EndMode2D();
+
   EndDrawing();
 }
