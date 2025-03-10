@@ -33,8 +33,10 @@ Vector2D Vector2D_init(float x, float y) {
 }
 
 static void Vector2D_draw(Vector2D vec) {
-  //
+  // vector line
   DrawLine(0, 0, vec.x, vec.y, GREEN);
+
+  // vector point
   DrawCircle(vec.x, vec.y, 5, RED);
 }
 
@@ -67,11 +69,12 @@ static void Vector2D_scale(Vector2D *vec, float n) {
   vec->y *= n;
 }
 
+// multiplicação de vetores...
 // a projeção de um vetor no outro
 // essa projeção resulta numa escala
 // essa escala diz o quão alinhada estão esses vetores
 // mesmo setido -> (+)
-// dois perpendiculares (90 graus) -> 0,
+// dois perpendiculares (90 graus) -> 0 porque cos 90 é 0,
 // sentido oposto -> (-)
 static float Vector2D_dot_product(Vector2D vec_a, Vector2D vec_b) {
   return ((vec_a.x * vec_b.x) + (vec_a.y * vec_b.y));

@@ -30,6 +30,8 @@ Vector3D Vector3D_init(float x, float y, float z) {
 
   return vec2;
 }
+
+// TODO: return here in the future
 static void Vector3D_draw(Vector3D vec) {
   //
   Vector3 center = {
